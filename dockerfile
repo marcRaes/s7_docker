@@ -5,12 +5,14 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libxml2-dev \
     libzip-dev \
+    libpng-dev \
     unzip \
     && docker-php-ext-install \
     zip \
     pdo_mysql \
     && pecl install apcu \
-    && docker-php-ext-enable apcu
+    && docker-php-ext-enable apcu \
+    && docker-php-ext-install gd
 
 WORKDIR /var/www/html/
 
