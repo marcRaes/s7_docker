@@ -12,7 +12,9 @@ RUN apt-get update && apt-get install -y \
     pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
-    && docker-php-ext-install gd
+    && docker-php-ext-install gd \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
 
 WORKDIR /var/www/html/
 
