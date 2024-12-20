@@ -16,14 +16,23 @@ services:
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###
-  mailer:
+    mailer:
     image: axllent/mailpit
+    container_name: mailpit
+    restart: always
+    volumes:
+      - ./data:/data
     ports:
-      - "1025"
-      - "8025"
+      - 8025:8025
+      - 1025:1025
     environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATA_FILE: /data/mailpit.db
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MAIL_MAILER: smtp
+      MAIL_HOST: 127.0.0.1
+      MAIL_PORT: 1025
 ###< symfony/mailer ###
 
   php:
